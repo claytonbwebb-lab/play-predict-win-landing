@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Play Predict Win — World Cup 2026</title>
+  <meta name="description" content="Free to play prediction game. Predict match scores, top the leaderboard, win prizes. World Cup 2026." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #0d1b2e;
+      --navy-mid: #132640;
+      --green: #00e676;
+      --gold: #ffd600;
+      --white: #ffffff;
+      --grey: #8fa3b8;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--navy);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* NAV */
+    nav {
+      width: 100%;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: center;
+      background: rgba(13,27,46,0.95);
+      border-bottom: 1px solid rgba(0,230,118,0.15);
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .logo span.p { color: var(--green); }
+    .logo span.w { color: var(--gold); }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 64px 24px 48px;
+      max-width: 700px;
+      width: 100%;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(0,230,118,0.12);
+      border: 1px solid var(--green);
+      color: var(--green);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 6vw, 3.4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+
+    h1 .accent-green { color: var(--green); }
+    h1 .accent-gold  { color: var(--gold); }
+
+    .subline {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--grey);
+      line-height: 1.6;
+      margin-bottom: 36px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .cta-btn {
+      display: inline-block;
+      background: var(--green);
+      color: var(--navy);
+      font-size: 1.1rem;
+      font-weight: 800;
+      text-decoration: none;
+      padding: 16px 40px;
+      border-radius: 8px;
+      letter-spacing: 0.02em;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 24px rgba(0,230,118,0.35);
+    }
+    .cta-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(0,230,118,0.5);
+    }
+
+    .sub-note {
+      margin-top: 14px;
+      font-size: 0.85rem;
+      color: var(--grey);
+    }
+
+    /* TROPHY / DIVIDER */
+    .trophy {
+      font-size: 5rem;
+      margin-bottom: 8px;
+      filter: drop-shadow(0 0 24px rgba(255,214,0,0.4));
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { filter: drop-shadow(0 0 20px rgba(255,214,0,0.3)); }
+      50% { filter: drop-shadow(0 0 40px rgba(255,214,0,0.7)); }
+    }
+
+    /* HOW IT WORKS */
+    .how {
+      width: 100%;
+      max-width: 800px;
+      padding: 48px 24px;
+    }
+
+    .how h2 {
+      text-align: center;
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 36px;
+      color: var(--white);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+
+    .step {
+      background: var(--navy-mid);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .step-num {
+      width: 36px;
+      height: 36px;
+      background: var(--green);
+      color: var(--navy);
+      font-weight: 900;
+      font-size: 1rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 14px;
+    }
+
+    .step h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      font-size: 0.88rem;
+      color: var(--grey);
+      line-height: 1.5;
+    }
+
+    /* CTA FOOTER */
+    .cta-footer {
+      width: 100%;
+      max-width: 700px;
+      padding: 32px 24px 64px;
+      text-align: center;
+    }
+
+    .cta-footer h2 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .cta-footer p {
+      color: var(--grey);
+      margin-bottom: 28px;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.8rem;
+      color: rgba(143,163,184,0.5);
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo">
+      <span class="p">Play</span> <span class="p">Predict</span> <span class="w">Win</span>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="trophy">🏆</div>
+    <div class="badge">World Cup 2026 · Free to Play</div>
+    <h1>Predict. Compete.<br /><span class="accent-green">Win</span> <span class="accent-gold">Prizes.</span></h1>
+    <p class="subline">
+      Pick match scores, climb the leaderboard, and beat your mates across the biggest football tournament on the planet.
+    </p>
+    <a class="cta-btn" href="https://playpredictwin.com" target="_blank" rel="noopener">
+      Join Free — Play Now →
+    </a>
+    <p class="sub-note">No credit card. No catch. Just football.</p>
+  </section>
+
+  <section class="how">
+    <h2>How It Works</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Sign Up Free</h3>
+        <p>Create your account in seconds — completely free to join.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Make Predictions</h3>
+        <p>Predict the score for every World Cup 2026 match before kick-off.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Earn Points</h3>
+        <p>Score points for correct results, exact scores, and top performances.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Top the Leaderboard</h3>
+        <p>Compete against friends, groups, and the global community for prizes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-footer">
+    <h2>Ready to <span style="color:var(--green)">Play</span>?</h2>
+    <p>World Cup 2026 is coming. Get ahead of the competition.</p>
+    <a class="cta-btn" href="https://playpredictwin.com" target="_blank" rel="noopener">
+      Go to PlayPredictWin.com →
+    </a>
+  </section>
+
+  <footer>
+    &copy; 2026 PlayPredictWin &middot; play-predict-win.com
+  </footer>
+
+</body>
+</html>
